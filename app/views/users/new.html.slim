@@ -1,5 +1,16 @@
-<h1>Login</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Back', user_sessions_path %>
+h1 Users#new
+= form_for(@user) do |f|
+  div
+    = f.label :name
+    = f.text_field :name
+  div
+    = f.label :email
+    = f.text_field :email
+  div
+    = f.label :password
+    = f.password_field :password
+  div
+    = f.label :password_confirmation
+    = f.password_field :password_confirmation
+  div
+    = f.submit
