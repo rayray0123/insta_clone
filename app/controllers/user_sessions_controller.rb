@@ -1,17 +1,24 @@
 class UserSessionsController < ApplicationController
-  def create
-    @user = login(params[:email], params[:password])
+  skip_before_action :require_login, except: [:destroy]
 
-    if @user
-      redirect_back_or_to(:users, notice: 'Login successful')
+  def new
+  end
+
+  def create
+    # ユーザ名かメールアドレス、入力されたパスワード、remember_meチェックボックスの3つのパラメータをとる。
+    # このメソッドが認証を行い、一致するものが見つかった場合にそのUserを返す。
+    user = login(params[:email], params[:password])
+
+    if user
+      redirect_back_or_to(root_path, notice: 'ログインしました。')
     else
-      flash.now[:alert] = 'Login failed'
-      render action: 'new'
+      flash.now[:alert] = 'ログインに失敗しました。'
+      render action: 'new'  #render → viewを直接表示
     end
   end
 
   def destroy
     logout
-    redirect_to(:users, notice: 'Logged out!')
+    redirect_to(root_path notice: 'ログアウトしました。') #redirect_to → 指定されたURLへ飛ぶ
   end
 end

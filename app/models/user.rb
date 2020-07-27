@@ -18,13 +18,13 @@ class User < ApplicationRecord
   authenticates_with_sorcery!
 
   # バリデーションは、正しいデータだけをデータベースに保存するために行われる
-  # パスワードは３文字以上で objectがdatabaseに保存されていないとき(new_record?)かつ changesがよく分からない
+  # パスワードは３文字以上で objectがdatabaseに保存されていないとき(new_record?)かつ パスワードが更新された時(changes)
   validates :password, length: { minimum: 3 }, if: -> { new_record? || changes[:crypted_password] }
   # パスワードが確認用パスワードと一致しいるかどうか
   validates :password, confirmation: true, if: -> { new_record? || changes[:crypted_password] }
   # 確認用パスワードが空じゃないか
   validates :password_confirmation, presence: true, if: -> { new_record? || changes[:crypted_password] }
 
-  # e-mailが空じゃないか、重複指定ないか
+  # e-mailが空じゃないか、重複してないか
   validates :email, presence: true, uniqueness: true
 end

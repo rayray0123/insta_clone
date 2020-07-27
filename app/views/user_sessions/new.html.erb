@@ -1,6 +1,19 @@
 <h1>UserSessions#new</h1>
 <h1>Login</h1>
 
-<%= render 'form' %>
+<%= form_with url: :login, method: :post do |f| %>
 
-<%= link_to 'Back', user_sessions_path %>
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.text_field :email %>
+  </div>
+  <div class="field">
+    <%= f.label :password %><br />
+    <%= f.password_field :password %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Login" %>
+  </div>
+<% end %>
+
+<%= link_to 'Home', root_path %>
