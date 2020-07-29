@@ -7,7 +7,7 @@ skip_before_action :require_login
   def create
     @user = User.new(user_params)
     if @user.save # ユーザー登録できた場合
-      redirect_to welcome_path #ログイン画面に行く
+      redirect_to :welcome #ログイン画面に行く
     else
       render :new # ユーザー登録画面へ戻る
     end

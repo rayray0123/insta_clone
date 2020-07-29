@@ -72,3 +72,6 @@ gem 'redis-rails'
 # rails-i18n
 gem 'rails-i18n'
 gem 'annotate'
+gem 'jquery-rails'
+gem 'jquery-ui-rails'
+gem 'popper'

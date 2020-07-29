@@ -9,7 +9,7 @@
   <% if logged_in? %>
     <p>ログイン中です。</p>
     <br>
-    <%= link_to 'ログアウト', :logout, :method => :post %>
+    <%= link_to 'ログアウト', :logout %>
   <% else %>
     <p>
     <%= link_to 'サインアップ', new_user_path %>

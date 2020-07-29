@@ -19,6 +19,6 @@ class UserSessionsController < ApplicationController
 
   def destroy
     logout
-    redirect_to(root_path notice: 'ログアウトしました。') #redirect_to → 指定されたURLへ飛ぶ
+    redirect_to(root_path, notice: 'ログアウトしました。') #redirect_to → 指定されたURLへ飛ぶ
   end
 end
