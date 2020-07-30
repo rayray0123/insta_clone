@@ -1,6 +1,6 @@
-  - if flash[:notice] %>
-    div class="flash"
-    = flash[:notice]
+- if flash[:notice]
+  div class="flash"
+= flash[:notice]
 
 h1 Sign Up
 = form_for(@user) do |f|

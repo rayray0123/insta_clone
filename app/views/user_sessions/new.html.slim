@@ -1,0 +1,15 @@
+
+h1 Login
+
+= form_with url: :login do |f|
+
+  div
+    = f.label :email
+    = f.text_field :email
+  div
+    = f.label :password
+    = f.password_field :password
+  div
+    = f.submit "Login"
+
+= link_to 'Home', root_path
