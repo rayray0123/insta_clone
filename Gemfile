@@ -68,6 +68,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'slim-rails'
 gem 'sorcery'
+gem 'redis'
 gem 'redis-rails'
 # rails-i18n
 gem 'rails-i18n'
