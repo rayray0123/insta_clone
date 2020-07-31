@@ -1,6 +1,5 @@
 h1 Home
 - if logged_in?
-    p ログイン中です。
-    = link_to 'ログアウト', :logout
-else
-    = link_to 'サインアップ', new_user_path
+  p ログイン中です。
+- else
+  = link_to 'サインアップ', new_user_path
