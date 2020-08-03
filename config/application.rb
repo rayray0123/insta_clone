@@ -24,6 +24,8 @@ module InstaClone
      g.helper false
      g.skip_routes   true
     end
+    config.time_zone = 'Tokyo'
+    config.active_record.default_timezone = :local
   end
   require 'active_model/railtie'
   require 'active_job/railtie'
