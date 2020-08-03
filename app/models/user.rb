@@ -5,8 +5,8 @@
 #  id               :integer          not null, primary key
 #  crypted_password :string
 #  email            :string           not null
-#  name             :string
 #  salt             :string
+#  username         :string
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #
@@ -18,6 +18,8 @@ class User < ApplicationRecord
   authenticates_with_sorcery!
 
   # バリデーションは、正しいデータだけをデータベースに保存するために行われる
+  # usernameが重複していないか、空じゃないか
+  validates :username, uniqueness: true, presence: true
   # パスワードは３文字以上で objectがdatabaseに保存されていないとき(new_record?)かつ パスワードが更新された時(changes)
   validates :password, length: { minimum: 3 }, if: -> { new_record? || changes[:crypted_password] }
   # パスワードが確認用パスワードと一致しいるかどうか
@@ -25,6 +27,6 @@ class User < ApplicationRecord
   # 確認用パスワードが空じゃないか
   validates :password_confirmation, presence: true, if: -> { new_record? || changes[:crypted_password] }
 
-  # e-mailが空じゃないか、重複してないか
-  validates :email, presence: true, uniqueness: true
+  # e-mailが重複していないか、空じゃないか
+  validates :email, uniqueness: true, presence: true
 end

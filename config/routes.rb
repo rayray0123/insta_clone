@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
 # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  root 'home#home'
+  root 'users#new'
 # ユーザー登録フォーム、ユーザー追加アクションのルーティング
-  resources :users, only: [:new, :create]
+  resources :users, only: %i[new, create]
 
-  get 'welcome' => 'user_sessions#new', :as => :welcome
-  post 'login' => 'user_sessions#create', :as => :login
-  get 'logout' => 'user_sessions#destroy', :as => :logout
+  get 'login' => 'user_sessions#new'
+  post 'login' => 'user_sessions#create'
+  delete 'logout' => 'user_sessions#destroy'
 end

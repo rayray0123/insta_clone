@@ -1,5 +1,5 @@
 class UserSessionsController < ApplicationController
-  skip_before_action :require_login, except: [:destroy]
+  # skip_before_action :require_login, except: [:destroy]
 
   def new
   end
@@ -10,15 +10,15 @@ class UserSessionsController < ApplicationController
     user = login(params[:email], params[:password])
 
     if user
-      redirect_back_or_to(root_path, notice: 'ログインしました。')
+      redirect_back_or_to root_path, success: 'ログインしました'
     else
-      flash.now[:alert] = 'ログインに失敗しました。'
-      render action: 'new'  #render → viewを直接表示
+      flash.now[:alert] = 'ログインに失敗しました'
+      render 'new'  #render → viewを直接表示
     end
   end
 
   def destroy
     logout
-    redirect_to(root_path, notice: 'ログアウトしました。') #redirect_to → 指定されたURLへ飛ぶ
+    redirect_to root_path, success: 'ログアウトしました' #redirect_to → 指定されたURLへ飛ぶ
   end
 end
