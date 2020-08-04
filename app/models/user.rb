@@ -6,7 +6,7 @@
 #  crypted_password :string
 #  email            :string           not null
 #  salt             :string
-#  username         :string
+#  username         :string           not null
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #

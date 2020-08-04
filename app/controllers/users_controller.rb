@@ -7,7 +7,8 @@ skip_before_action :require_login
   def create
     @user = User.new(user_params)
     if @user.save # ユーザー登録できた場合
-      redirect_to ligin_path, success: 'ユーザーを作成しました' #ログイン画面に行く
+      auto_login(@user)
+      redirect_to root_path, success: 'ユーザーを作成しました' #ルート画面に戻る
     else
       flash.now[:danger] = 'ユーザーに作成に失敗しました'
       render :new # ユーザー登録画面へ戻る

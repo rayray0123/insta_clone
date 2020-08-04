@@ -5,6 +5,6 @@ class ApplicationController < ActionController::Base
   protected
 
   def not_authenticated
-    redirect_to welcome_path
+    redirect_to login_path
   end
 end
