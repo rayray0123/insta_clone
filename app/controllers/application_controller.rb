@@ -1,5 +1,4 @@
 class ApplicationController < ActionController::Base
-  # ログインしていなかったらnot_authenticatedを実行
-  # before_action :require_login
+  # bootstrapでフラッシュメッセージを表示できるようにキーを指定
   add_flash_types :success, :info, :warning, :danger
 end
