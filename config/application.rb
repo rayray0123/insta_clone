@@ -19,11 +19,15 @@ module InstaClone
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
     config.generators do |g|
-      g.assets false
-      # g.test_framework    false
-      g.helper false
-      g.skip_routes true
+      g.assets false            # CSS,JavaScriptファイルを生成しない
+      g.test_framework    false # testファイルを生成しない
+      g.helper false            # helperファイルを生成しない
+      g.skip_routes true        # trueならroutes.rb変更せず、falseなら通常通り変更
     end
+
+    # 自動生成されるファイルをerbからslim形式に変更
+    config.generators.template_engine = :slim
+
     config.time_zone = 'Tokyo'
     config.active_record.default_timezone = :local
 
