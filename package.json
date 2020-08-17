@@ -1,5 +1,15 @@
 {
   "name": "insta_clone",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "bootstrap": "^4.5.0",
+    "bootstrap-material-design": "^4.1.3",
+    "jquery": "^3.5.1",
+    "popper.js": "^1.16.1"
+  },
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:rayray0123/insta_clone.git",
+  "author": "rayray0123 <banapa2008@yahoo.co.jp>",
+  "license": "MIT"
 }
