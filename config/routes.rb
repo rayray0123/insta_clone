@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  # constraints ＝ ルートに制限をかける
+  # requestオブジェクト ＝ パラメータやパスの取得に使われる
+  # present? = 値が存在する？
   constraints ->  request { request.session[:user_id].present? } do
     # ログインしてる時のルートパス
     root 'posts#index'
