@@ -14,5 +14,12 @@
 #  index_posts_on_user_id  (user_id)
 #
 class Post < ApplicationRecord
-  belongs_to :user
+  # ユーザーが削除されたときに、そのユーザーに紐付いた(そのユーザーが投稿した)投稿も一緒に削除
+  belongs_to :user, dependent: :destroy
+  # 投稿したユーザーが空じゃないか
+  validates :user_id, presence: true
+  # 投稿した文章が空じゃないか
+  validates :body, presence: true, length: { maximum: 140 }
+  # 投稿した画像が空じゃないか
+  validates :image, presence: true
 end

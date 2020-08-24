@@ -1,13 +1,6 @@
 Rails.application.routes.draw do
-  # constraints ＝ ルートに制限をかける
-  # requestオブジェクト ＝ パラメータやパスの取得に使われる
-  # present? = 値が存在する？
-  constraints ->  request { request.session[:user_id].present? } do
-    # ログインしてる時のルートパス
-    root 'posts#index'
-  end
-  # ログインしてない時のルートパス
-  root 'user_sessions#new'
+
+  root 'posts#index'
 
   get 'login' => 'user_sessions#new'
   post 'login' => 'user_sessions#create'
@@ -15,5 +8,7 @@ Rails.application.routes.draw do
 
   # ユーザー登録フォーム、ユーザー追加アクションのルーティング
   resources :users, only: %i[new create]
+  # リソース = postsテーブルにとっての１投稿
+  # resources = 基本となる7つのアクションをリクエストするルーティングを設定
   resources :posts
 end
