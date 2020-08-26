@@ -5,7 +5,7 @@
     = f.label :images
     = f.file_field :images, multiple: true, class: 'form-control' / multiple: true = 画像を複数一度に投稿
     - post.images.each do |image|
-      = image_tag image.url, size: '100x100', class: 'image-thumbnail'
+      = image_tag image.url, size: '100x100', class: 'image-thumbnail' / アップロードする画像表示
   .form-group
     = f.label :body
     = f.text_area :body, class: 'form-control'

@@ -45,7 +45,9 @@ before_action :logged_in?, only: [:create, :destroy]
 
   private
 
-   def post_params
-     params.require(:post).permit(:image, :body)
+   def post_params # ストロングパラメータ = Web上から入力されてきた値を制限することで、不正なパラメータを防ぐ仕組み DBに受け取る値を制限
+     params.require(:post).permit(:image [], :body) # requireというメソッドでPOSTで受け取る値のキー設定
+                                                  # permitメソッドで許可して受け取る値を制限
+                                                  # ストロングパラメータにimagesを配列で渡す
    end
 end
