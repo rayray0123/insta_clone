@@ -2,7 +2,7 @@ class PostsController < ApplicationController
 before_action :logged_in?, only: [:create, :destroy]
 # GETアクション
   def edit
-    @posts = User.posts
+    @posts = current_ser.posts.find(params[:id])
   end
 
   def index
@@ -20,19 +20,26 @@ before_action :logged_in?, only: [:create, :destroy]
   # POSTアクション
   def create
     @post = current_user.posts.build(post_params)
-    @post.save
+    if @post.save
     flash[:success] = "新しい投稿をしました"
     redirect_to root_path
   end
 
-  def updated
-    @post = current_user.posts.find_by(id: params[:id])
-    if @post.update_atributes(post_params)
-      @post.save
+  def update
+    # find_by = 検索したい条件に合うレコードから最初に一致した１件だけを拾ってくる
+    # find = 主キー(ID)を使用して、特定のオブジェクトを検索する
+    # IDがわかっている場合は、findメソッド
+    # IDが不明で、別の条件でレコード検索をしたい場合は、find_byメソッド
+    @post = current_user.posts.find(params[:id])
+    # update_atributes updateの別名のメソッド
+    if @post.update(post_params)
       flash[:success] = "投稿を編集しました"
-      redirect＿to root_path
+      redirect＿to post_path # show.html.slimへ
     else
-      redirect_to edit_post_path
+      # redirect_to,render = コントローラーを経由するか、そのままビューを表示するか
+      # redirectではなくrender もう@post内にすでに投稿内容が入っているから
+      # :edit ビューを指定
+      render :edit
     end
   end
 
