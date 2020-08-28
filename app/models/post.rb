@@ -19,7 +19,7 @@
 #
 class Post < ApplicationRecord
   # PostモデルにCarrierwaveを関連付け
-  mount_uploader :image, PostImageUploader
+  mount_uploader :images, PostImageUploader
   # テキスト型のカラムに配列を格納するための行
   serialize :images, JSON
   # ユーザーが削除されたときに、そのユーザーに紐付いた(そのユーザーが投稿した)投稿も一緒に削除,

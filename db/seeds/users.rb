@@ -1,5 +1,5 @@
 puts 'Start inserting seed "users" ...'
-3.times do
+10.times do
   user = User.create(
     # Fakerの一覧 https://github.com/faker-ruby/faker/blob/master/README.md
     # uniqueで重複防止
