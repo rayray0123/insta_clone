@@ -13,6 +13,7 @@
         = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle mr-1'
         = @post.user.username
         / 自分の投稿には編集、削除アイコンを表示
+        / このif文の.own?のドットはどういう意味？
         - if current_user&.own?(@post)
           .ml-auto
             = link_to post_path(@post), class: 'mr-3', method: :delete, data: {confirm: '本当に削除しますか？'} do

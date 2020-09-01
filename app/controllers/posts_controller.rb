@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
-before_action :require_login, only: %i[new create edit update destroy]
-# GETアクション
+  before_action :require_login, only: %i[new create edit update destroy]
+  # GETアクション
   def edit
     @post = current_user.posts.find(params[:id])
   end
@@ -40,7 +40,7 @@ before_action :require_login, only: %i[new create edit update destroy]
     @post = current_user.posts.find(params[:id])
     # update_atributes updateの別名のメソッド
     if @post.update(post_params)
-      redirect_to posts_path success: '投稿を更新しました'# show.html.slimへ
+      redirect_to posts_path success: '投稿を更新しました' # show.html.slimへ
     else
       flash.now[:danger] = '投稿の更新に失敗しました'
       # redirect_to,render = コントローラーを経由するか、そのままビューを表示するか
@@ -61,7 +61,7 @@ before_action :require_login, only: %i[new create edit update destroy]
 
   def post_params # ストロングパラメータ = Web上から入力されてきた値を制限することで、不正なパラメータを防ぐ仕組み DBに受け取る値を制限
     params.require(:post).permit(:body, images: []) # requireというメソッドでPOSTで受け取る値のキー設定
-                                                  # permitメソッドで許可して受け取る値を制限
-                                                  # ストロングパラメータにimagesを配列で渡す
+    # permitメソッドで許可して受け取る値を制限
+    # ストロングパラメータにimagesを配列で渡す
   end
 end

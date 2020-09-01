@@ -33,6 +33,7 @@ class User < ApplicationRecord
   # has many = 多くを持つ
   has_many :posts, dependent: :destroy
   # ログインしている人の投稿だったらtrueを返す
+  # @current_user.idと投稿のuser_idを判定していると思われる
   def own?(object)
     id == object.user_id
   end
