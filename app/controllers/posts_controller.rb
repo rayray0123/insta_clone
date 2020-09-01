@@ -2,7 +2,7 @@ class PostsController < ApplicationController
 before_action :require_login, only: %i[new create edit update destroy]
 # GETアクション
   def edit
-    @posts = current_ser.posts.find(params[:id])
+    @post = current_user.posts.find(params[:id])
   end
 
   def index
@@ -22,6 +22,7 @@ before_action :require_login, only: %i[new create edit update destroy]
 
   # POSTアクション
   def create
+    # ここで画像がリサイズされる
     @post = current_user.posts.build(post_params)
     if @post.save
       redirect_to root_path, success: '投稿しました'
@@ -39,8 +40,9 @@ before_action :require_login, only: %i[new create edit update destroy]
     @post = current_user.posts.find(params[:id])
     # update_atributes updateの別名のメソッド
     if @post.update(post_params)
-      redirect＿to post_path success: '投稿を更新しました'# show.html.slimへ
+      redirect_to posts_path success: '投稿を更新しました'# show.html.slimへ
     else
+      flash.now[:danger] = '投稿の更新に失敗しました'
       # redirect_to,render = コントローラーを経由するか、そのままビューを表示するか
       # redirectではなくrender もう@post内にすでに投稿内容が入っているから
       # :edit ビューを指定
@@ -49,7 +51,7 @@ before_action :require_login, only: %i[new create edit update destroy]
   end
 
   def destroy
-    @post = current_user.posts.find_by(id: params[:id])
+    @post = current_user.posts.find(params[:id])
     # destroy! = 削除できなかったときエラーが表示される(flashではなく)
     @post.destroy!
     redirect_to root_path, success: '投稿を削除しました'

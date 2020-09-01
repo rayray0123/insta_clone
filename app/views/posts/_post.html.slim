@@ -1,9 +1,11 @@
+/ index.html.slim内で呼び出される。
 .card.mb-5.post
   .card-header
     .d-flex.align-items-center
       = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle mr-1'
       = post.user.username
-      - if current_user&.own(post) / 自分の投稿には編集、削除アイコンを表示
+      / 自分の投稿には編集、削除アイコンを表示
+      - if current_user&.own?(post)
         .ml-auto
           = link_to post_path(post), class: 'mr-3', method: :delete, data: { confirm: '本当に削除しますか？' } do
             = icon 'far', 'trash-alt', class: 'fa-lg'

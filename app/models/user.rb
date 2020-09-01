@@ -32,8 +32,8 @@ class User < ApplicationRecord
   validates :email, uniqueness: true, presence: true
   # has many = 多くを持つ
   has_many :posts, dependent: :destroy
-
-  def own(object)
+  # ログインしている人の投稿だったらtrueを返す
+  def own?(object)
     id == object.user_id
   end
 end

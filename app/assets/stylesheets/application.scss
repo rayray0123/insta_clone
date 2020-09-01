@@ -1,7 +1,8 @@
 @import 'bootstrap-material-design/dist/css/bootstrap-material-design';
-@import 'swiper/css/swiper';
+@import 'swiper/swiper-bundle';
 @import 'font-awesome-sprockets';
 @import 'font-awesome';
+
 
 
 body {
@@ -20,6 +21,7 @@ img {
 .login-register-form {
   position: relative;
   height: 100vh;
+
   .login-register-form-inner {
     position: absolute;
     top: 50%;
@@ -92,5 +94,4 @@ img {
         flex: 1;
       }
     }
-  }
-}
+  }}
