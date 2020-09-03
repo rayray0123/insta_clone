@@ -32,6 +32,8 @@ class User < ApplicationRecord
   validates :email, uniqueness: true, presence: true
   # has many = 多くを持つ
   has_many :posts, dependent: :destroy
+  # クラスメソッド = クラスオブジェクトから呼び出すためのメソッド
+  # インスタンスメソッド = インスタンスオブジェクトから呼び出すためのメソッド(own?)
   # ログインしている人の投稿だったらtrueを返す
   # @current_user.idと投稿のuser_idを判定していると思われる
   def own?(object)

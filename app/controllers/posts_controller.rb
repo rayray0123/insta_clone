@@ -9,6 +9,7 @@ class PostsController < ApplicationController
     # 投稿データを作成された時間で降順に並べ直して代入
     # postテーブルのuser_idとuserテーブルのidを対応させる方法で二つのテーブルを左外部結合する
     # https://qiita.com/naoki_mochizuki/items/3fda1ad6594c11d7b43c
+    # N＋1問題を解決するためにincludesを使いUserとPostをまとめて、一回ずつloadするだけにしている
     @posts = Post.all.includes(:user).order(created_at: :desc)
   end
 
@@ -62,6 +63,6 @@ class PostsController < ApplicationController
   def post_params # ストロングパラメータ = Web上から入力されてきた値を制限することで、不正なパラメータを防ぐ仕組み DBに受け取る値を制限
     params.require(:post).permit(:body, images: []) # requireというメソッドでPOSTで受け取る値のキー設定
     # permitメソッドで許可して受け取る値を制限
-    # ストロングパラメータにimagesを配列で渡す
+    # 複数のデータを送るときには[]を付けないといけない(DBに入る前までは配列でデータが送られてくるから)
   end
 end
