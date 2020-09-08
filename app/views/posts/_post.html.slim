@@ -6,8 +6,8 @@
       = post.user.username
       / 自分の投稿には編集、削除アイコンを表示
       / current_userが nil 出ない時 .own を呼び出し(&&とは違う)
-      / foo = 13
-      / foo&.to_s # => "13"
+      / 例 foo = 13
+      /  　foo&.to_s # => "13"
       - if current_user&.own?(post)
         .ml-auto
           = link_to post_path(post), class: 'mr-3', method: :delete, data: { confirm: '本当に削除しますか？' } do

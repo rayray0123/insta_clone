@@ -35,8 +35,9 @@ class User < ApplicationRecord
   # クラスメソッド = クラスオブジェクトから呼び出すためのメソッド
   # インスタンスメソッド = インスタンスオブジェクトから呼び出すためのメソッド(own?)
   # ログインしている人の投稿だったらtrueを返す
-  # @current_user.idと投稿のuser_idを判定していると思われる
+  # current_user.idと投稿のuser_idを判定している
   def own?(object)
+    # id = self.id
     id == object.user_id
   end
 end
