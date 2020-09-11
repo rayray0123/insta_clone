@@ -11,6 +11,7 @@ class PostsController < ApplicationController
     # https://qiita.com/naoki_mochizuki/items/3fda1ad6594c11d7b43c
     # N＋1問題を解決するためにincludesを使いUserとPostをまとめて、一回ずつloadするだけにしている
     @posts = Post.all.includes(:user).order(created_at: :desc)
+    @posts = @posts.page(params[:page]).per(10)
   end
 
   def new
