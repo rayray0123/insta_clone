@@ -31,4 +31,5 @@
 /config/master.key
 
 /public/uploads
+# redisデータ永続化に関するファイル
 dump.rdb
