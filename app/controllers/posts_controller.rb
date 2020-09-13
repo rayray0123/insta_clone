@@ -10,7 +10,9 @@ class PostsController < ApplicationController
     # postテーブルのuser_idとuserテーブルのidを対応させる方法で二つのテーブルを左外部結合する
     # https://qiita.com/naoki_mochizuki/items/3fda1ad6594c11d7b43c
     # N＋1問題を解決するためにincludesを使いUserとPostをまとめて、一回ずつloadするだけにしている
-    @posts = Post.all.includes(:user).order(created_at: :desc)
+    # ページネーションをつけたいデータに.page(params[:page])を追加
+    # params[:page] 指定されたページ番号が入る
+    @posts = Post.all.includes(:user).order(created_at: :desc).page(params[:page])
   end
 
   def new
