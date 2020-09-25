@@ -25,7 +25,9 @@ class Post < ApplicationRecord
   # 画像をDBから取り出すときその文字列を配列だと認識させるためにserialize,JASONを使う
   serialize :images, JSON
   # ユーザーが削除されたときに、そのユーザーに紐付いた(そのユーザーが投稿した)投稿も一緒に削除,
-  # ここにdependent: :destroyをつけると投稿が削除されたときにユーザーも削除されてしまう
+  # ここに belongs_to :user, dependent: :destroyをつけると投稿が削除されたときにユーザーも削除されてしまう
+  # Post.commentsで、ユーザーの所有するコメントを取得できる。
+  has_many :comments, dependent: :destroy
   # belongs = 属する
   belongs_to :user
   # 投稿した文章が空じゃないか

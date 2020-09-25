@@ -1,0 +1,11 @@
+/ エラーメッセージが空ではないなら
+- if @comment.errors.present?
+  | alert("#{@comment.errors.full_messages.join('\n')}");
+- else
+  / .comments-box(_comments.html.slim)内を_comment.html.slimの内容に置き換える
+  / Ajaxなので以前のコメントを残した上でその一番上に新しいコメントを表示
+  /.prepend = 先頭にHTMLを挿入する
+  / j = escape_javascriptのエイリアス
+  | $('.comments-box').prepend("#{j render('comments/comment', comment: @comment)}");
+  / フォームに入力していたコメント文を消去
+  | $('.input-comment-body').val('');

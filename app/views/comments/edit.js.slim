@@ -1,0 +1,6 @@
+/ モーダルを表示する前に_modal_form.html.slimに変更前のコメントを追加している
+/ .html = htmlを変更
+/ escape_javascript = javascript用に実行結果(コメント内容)にエスケープ処理をする
+| $("#modal-container").html("#{escape_javascript(render 'modal_form', comment: @comment)}");
+/ モーダルのコメント投稿フォームを表示(_modal_form.html.slim内のidを指定している)
+| $("#comment-edit-modal").modal('show');
