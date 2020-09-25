@@ -3,6 +3,8 @@ div id="comment-#{comment.id}"
     .col-2
       = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle'
     .col-9
+      span.font-weight-bold.pr-1
+        = comment.user.username
       = comment.body
     .col-1
       - if current_user&.own?(comment)
@@ -11,7 +13,7 @@ div id="comment-#{comment.id}"
         / htmlファイルをレンダリングしないのでページ遷移を行わない(非同期)
         / html形式とjs形式でのリクエストの違い参考URL
         / https://qiita.com/__tambo__/items/45211df065e0c037d032
-        
+
         = link_to comment_path(comment), class: 'mr-3', method: :delete, data: {confirm: '本当に削除しますか？'}, remote: true do
           = icon 'far', 'trash-alt', class: 'fa-sm'
         = link_to edit_comment_path(comment), remote: true do

@@ -35,7 +35,7 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   # has many = 多くを持つ
   has_many :posts, dependent: :destroy
-  
+
   # クラスメソッド = クラスオブジェクトから呼び出すためのメソッド
   # インスタンスメソッド = インスタンスオブジェクトから呼び出すためのメソッド(own?)
   # ログインしている人の投稿だったらtrueを返す
