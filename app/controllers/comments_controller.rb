@@ -26,6 +26,7 @@ class CommentsController < ApplicationController
   private
 
   def comment_params
+    # .merge = 投稿のページの post.id を引っ張ってきてパラメータに追加
     params.require(:comment).permit(:body).merge(post_id: params[:post_id])
   end
 

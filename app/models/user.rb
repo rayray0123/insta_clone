@@ -30,7 +30,7 @@ class User < ApplicationRecord
 
   # e-mailが重複していないか、空じゃないか
   validates :email, uniqueness: true, presence: true
-  # User.commentsで、ユーザーの所有するコメントを取得できる。
+  # User.find(2).commentsで、ユーザーの所有するコメントを取得できる。
   # ユーザーが削除されたときに、そのユーザーに紐付いた(そのユーザーが投稿した)投稿も一緒に削除
   has_many :comments, dependent: :destroy
   # has many = 多くを持つ

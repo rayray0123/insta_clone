@@ -66,8 +66,9 @@ class PostsController < ApplicationController
 
   private
 
-  def post_params # ストロングパラメータ = Web上から入力されてきた値を制限することで、不正なパラメータを防ぐ仕組み DBに受け取る値を制限
-    params.require(:post).permit(:body, images: []) # requireというメソッドでPOSTで受け取る値のキー設定
+  def post_params # ストロングパラメータ = Web上から入力されてきた値を制限することで、
+                  # 不正なパラメータを防ぐ仕組み DBに受け取る値を制限
+    params.require(:post).permit(:body, images: []) # requireメソッドでPOSTで受け取る値のキー設定
     # permitメソッドで許可して受け取る値を制限
     # 複数のデータを送るときには[]を付けないといけない(DBに入る前までは配列でデータが送られてくるから)
   end

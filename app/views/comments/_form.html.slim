@@ -4,6 +4,8 @@
 / htmlファイルをレンダリングしないのでページ遷移を行わない(非同期)
 / html形式とjs形式でのリクエストの違い参考URL
 / https://qiita.com/__tambo__/items/45211df065e0c037d032
+/ 新規コメント投稿とコメント編集の両方で同じこのフォームを使う
+/ コメント編集時、postはnil
 
 = form_with model: [post, comment], class: 'd-flex mb-0 flex-nowrap justify-content-between', remote: true do |f|
   = f.text_field :body, class: 'form-control input-comment-body', placeholder: 'コメント'

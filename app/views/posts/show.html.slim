@@ -32,4 +32,5 @@
       = render 'comments/comments', comments: @comments
     hr.m-0
     .post-comment.p-3
+      / showアクションで定義したインスタンス変数を渡す
       = render 'comments/form', post: @post, comment: @comment
