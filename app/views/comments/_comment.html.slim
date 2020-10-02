@@ -1,0 +1,21 @@
+div id="comment-#{comment.id}"
+  .row.no-gutters
+    .col-2
+      = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle'
+    .col-9
+      span.font-weight-bold.pr-1
+        = comment.user.username
+      = comment.body
+    .col-1
+      - if current_user&.own?(comment)
+        / remote: true = js形式でリクエスト、コントローラのアクションを実行した後
+        / jsファイル(View)を出力、ページの一部分だけを更新
+        / htmlファイルをレンダリングしないのでページ遷移を行わない(非同期)
+        / html形式とjs形式でのリクエストの違い参考URL
+        / https://qiita.com/__tambo__/items/45211df065e0c037d032
+
+        = link_to comment_path(comment), class: 'mr-3', method: :delete, data: {confirm: '本当に削除しますか？'}, remote: true do
+          = icon 'far', 'trash-alt', class: 'fa-sm'
+        = link_to edit_comment_path(comment), remote: true do
+          = icon 'far', 'edit', class: 'fa-sm'
+  hr

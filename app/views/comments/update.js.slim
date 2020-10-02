@@ -1,0 +1,12 @@
+/ エラーメッセージが空ではないなら
+- if @comment.errors.present?
+  / アラートでエラーメッセージ表示
+  | alert("#{@comment.errors.full_messages.join('\n')}");
+- else
+  / _comment.html.slim内、divタグの id="comment-#{comment.id}"を指定してその中で、
+  / アクションから渡された新規のコメントを書き出す
+  / .html = htmlを変更
+  / j = escape_javascriptのエイリアス
+  | $("#comment-#{@comment.id}").html("#{j render('comments/comment', comment: @comment)}");
+  / モーダルを閉じる
+  | $("#comment-edit-modal").modal('hide');

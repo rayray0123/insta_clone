@@ -15,4 +15,6 @@ html
       = render 'shared/before_login_header'
     = render 'shared/flash_messages'
     main
+      / アクションに対するViewファイルがここで出力される
       = yield
+      = render 'shared/modal'

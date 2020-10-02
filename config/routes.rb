@@ -9,5 +9,12 @@ Rails.application.routes.draw do
   resources :users, only: %i[new create]
   # リソース = postsテーブルにとっての１投稿
   # resources = 基本となる7つのアクションをリクエストするルーティングを設定
-  resources :posts
+  # shallow = リソースの関係性を一意に特定できる際に、不必要なURLを短くできるRailsの
+  # ルーティングのオプション
+  # edit,show,update,destroyでは /posts/post_id/ を省略する
+  # https://kossy-web-engineer.hatenablog.com/entry/2018/10/17/063136
+  resources :posts, shallow: true do
+    # ネスト = ある記述の中に入れ子構造で別の記述をする方法
+    resources :comments
+  end
 end

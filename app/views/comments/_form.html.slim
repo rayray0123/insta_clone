@@ -1,0 +1,12 @@
+/ postsの show.html.slim, _modal_form.html.slim内で呼び出されるコメント投稿フォーム
+/ remote: true = js形式でリクエスト、コントローラのアクションを実行した後
+/ jsファイル(View)を出力、ページの一部分だけを更新
+/ htmlファイルをレンダリングしないのでページ遷移を行わない(非同期)
+/ html形式とjs形式でのリクエストの違い参考URL
+/ https://qiita.com/__tambo__/items/45211df065e0c037d032
+/ 新規コメント投稿とコメント編集の両方で同じこのフォームを使う
+/ コメント編集時、postはnil
+
+= form_with model: [post, comment], class: 'd-flex mb-0 flex-nowrap justify-content-between', remote: true do |f|
+  = f.text_field :body, class: 'form-control input-comment-body', placeholder: 'コメント'
+  = f.submit '投稿', class: 'btn btn-primary btn-raised'

@@ -21,6 +21,10 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    # 上から新しいコメントを表示するために order(created_at: :desc)
+    # N+1問題解消のためincludes(:user)
+    @comments = @post.comments.includes(:user).order(created_at: :desc)
+    @comment = Comment.new
   end
 
   # POSTアクション
@@ -62,8 +66,9 @@ class PostsController < ApplicationController
 
   private
 
-  def post_params # ストロングパラメータ = Web上から入力されてきた値を制限することで、不正なパラメータを防ぐ仕組み DBに受け取る値を制限
-    params.require(:post).permit(:body, images: []) # requireというメソッドでPOSTで受け取る値のキー設定
+  def post_params # ストロングパラメータ = Web上から入力されてきた値を制限することで、
+                  # 不正なパラメータを防ぐ仕組み DBに受け取る値を制限
+    params.require(:post).permit(:body, images: []) # requireメソッドでPOSTで受け取る値のキー設定
     # permitメソッドで許可して受け取る値を制限
     # 複数のデータを送るときには[]を付けないといけない(DBに入る前までは配列でデータが送られてくるから)
   end
