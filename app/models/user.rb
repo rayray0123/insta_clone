@@ -35,6 +35,7 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   # has many = 多くを持つ
   has_many :posts, dependent: :destroy
+  has_many :likes, dependent: :destroy
 
   # クラスメソッド = クラスオブジェクトから呼び出すためのメソッド
   # インスタンスメソッド = インスタンスオブジェクトから呼び出すためのメソッド(own?)
