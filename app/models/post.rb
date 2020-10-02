@@ -28,6 +28,8 @@ class Post < ApplicationRecord
   # ここに belongs_to :user, dependent: :destroyをつけると投稿が削除されたときにユーザーも削除されてしまう
   # Post.find(20).commentsで、投稿に対するコメントを取得できる。
   has_many :comments, dependent: :destroy
+  
+  has_many :likes, dependent: :destroy
   # belongs = 属する
   belongs_to :user
   # 投稿した文章が空じゃないか

@@ -17,4 +17,7 @@ Rails.application.routes.draw do
     # ネスト = ある記述の中に入れ子構造で別の記述をする方法
     resources :comments
   end
+  resources :posts do
+      resources :likes, only: [:create, :destroy]
+  end
 end
