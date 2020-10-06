@@ -30,11 +30,13 @@ class User < ApplicationRecord
 
   # e-mailが重複していないか、空じゃないか
   validates :email, uniqueness: true, presence: true
+  has_many :posts, dependent: :destroy
   # User.find(2).commentsで、ユーザーの所有するコメントを取得できる。
   # ユーザーが削除されたときに、そのユーザーに紐付いた(そのユーザーが投稿した)投稿も一緒に削除
   has_many :comments, dependent: :destroy
   # has many = 多くを持つ
-  has_many :posts, dependent: :destroy
+  # @user.like_postsとするとuserがlikeしたpostを取得できる
+  has_many :like_posts, through: :likes, source: :post
   has_many :likes, dependent: :destroy
 
   # クラスメソッド = クラスオブジェクトから呼び出すためのメソッド
@@ -44,5 +46,18 @@ class User < ApplicationRecord
   def own?(object)
     # id = self.id
     id == object.user_id
+  end
+
+  def like(post)
+    like_posts << post
+  end
+
+  def unlike(post)
+    like_posts.delete(post)
+  end
+
+  def like?(post)
+    # like_postsの中にpostオブジェクトが含まれていればtrueを返します。
+    like_posts.include?(post)
   end
 end

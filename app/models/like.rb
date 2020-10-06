@@ -24,6 +24,6 @@ class Like < ApplicationRecord
   belongs_to :user
   belongs_to :post
   # user_id_はpost_idとの組み合わせで一意となるように設定。
-  validates :user_id, presence: true, uniqueness: {scope: :post_id}
-  validates :post_id, presence: true
+  # scope: = 一意性チェックの範囲を限定する別の属性を指定する
+  validates :user_id, uniqueness: {scope: :post_id}
 end
