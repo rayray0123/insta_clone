@@ -1,5 +1,7 @@
 div id="like_area-#{post.id}"
   - if current_user.like?(post)
+    / いいねしていた場合
     = render 'unlike', post: post
   - else
+    / いいねしていなかった場合
     = render 'like', post: post

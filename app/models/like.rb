@@ -20,10 +20,11 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Like < ApplicationRecord
+  # defaultでbelongs_toの第一引数に、そのモデルに紐づくモデル名を全て小文字で単数系で設定
   # belongs_toで多対１
   belongs_to :user
   belongs_to :post
-  # user_id_はpost_idとの組み合わせで一意となるように設定。
+  # user_id_とpost_idの組み合わせが同じものは一つだけに制限。いいねを2回させない。
   # scope: = 一意性チェックの範囲を限定する別の属性を指定する
   validates :user_id, uniqueness: {scope: :post_id}
 end

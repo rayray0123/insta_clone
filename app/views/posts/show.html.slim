@@ -19,6 +19,7 @@
               = icon 'far', 'trash-alt', class: 'fa-lg'
             = link_to edit_post_path(@post) do
               = icon 'far', 'edit', class: 'fa-lg'
+        / ログインしていて、ログインしている人の投稿じゃなかったら
         - if current_user && !current_user.own?(@post)
           .ml-auto
             = render 'like_area', post: @post
