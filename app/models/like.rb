@@ -26,5 +26,5 @@ class Like < ApplicationRecord
   belongs_to :post
   # user_id_とpost_idの組み合わせが同じものは一つだけに制限。いいねを2回させない。
   # scope: = 一意性チェックの範囲を限定する別の属性を指定する
-  validates :user_id, uniqueness: {scope: :post_id}
+  validates :user_id, uniqueness: { scope: :post_id }
 end

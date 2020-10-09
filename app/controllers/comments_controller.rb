@@ -9,7 +9,7 @@ class CommentsController < ApplicationController
   end
 
   def edit
-    #_comment.html.slimから
+    # _comment.html.slimから
     # params[:id]にはコメントのidが入る
     @comment = current_user.comments.find(params[:id])
   end
