@@ -20,6 +20,7 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Comment < ApplicationRecord
+  # defaultでbelongs_toの第一引数に、そのモデルに紐づくモデル名を全て小文字で単数系で設定
   belongs_to :user
   belongs_to :post
   validates :body, presence: true, length: { maximum: 1000 }

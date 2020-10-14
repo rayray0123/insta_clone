@@ -24,10 +24,15 @@ class Post < ApplicationRecord
   # 配列で送られてきた画像データをDBにはただの一つの文字列(string型)として保存
   # 画像をDBから取り出すときその文字列を配列だと認識させるためにserialize,JASONを使う
   serialize :images, JSON
-  # ユーザーが削除されたときに、そのユーザーに紐付いた(そのユーザーが投稿した)投稿も一緒に削除,
+  # 投稿が削除されたときに、その投稿に紐付いたコメントも一緒に削除,
   # ここに belongs_to :user, dependent: :destroyをつけると投稿が削除されたときにユーザーも削除されてしまう
   # Post.find(20).commentsで、投稿に対するコメントを取得できる。
   has_many :comments, dependent: :destroy
+
+  has_many :likes, dependent: :destroy
+  # @post.like_usersとするとpostにlikeしているuserを取得できる
+  # PostモデルをLikeモデルを経由してUserモデルと関連づける
+  has_many :like_users, through: :likes, source: :user
   # belongs = 属する
   belongs_to :user
   # 投稿した文章が空じゃないか
