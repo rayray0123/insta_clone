@@ -42,6 +42,10 @@ class User < ApplicationRecord
   # likeモデルのuser.idとpost.idの組み合わせを見てUserモデルをLikeモデルを経由してPostモデルと関連づける
   has_many :like_posts, through: :likes, source: :post
 
+  # モデルのscope = 複数のクエリをまとめたメソッド
+  # DBからランダムにデータをcountの数取り出す
+  scope :randoms, -> (count) { self.order("RAND()").limit(count) }
+
   # クラスメソッド = クラスオブジェクトから呼び出すためのメソッド
   # インスタンスメソッド = インスタンスオブジェクトから呼び出すためのメソッド(own?)
   # ログインしている人の投稿だったらtrueを返す

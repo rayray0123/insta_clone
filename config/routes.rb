@@ -39,7 +39,7 @@ Rails.application.routes.draw do
   delete 'logout' => 'user_sessions#destroy'
 
   # ユーザー登録フォーム、ユーザー追加アクションのルーティング
-  resources :users, only: %i[new create]
+  resources :users, only: %i[index new create]
   # リソース = postsテーブルにとっての１投稿
   # resources = 基本となる7つのアクションをリクエストするルーティングを設定
   # shallow = リソースの関係性を一意に特定できる際に、不必要なURLを短くできるRailsの
