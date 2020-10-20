@@ -10,50 +10,63 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_201_002_013_054) do
-  create_table 'comments', options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8', force: :cascade do |t|
-    t.bigint 'user_id'
-    t.bigint 'post_id'
-    t.text 'body', null: false
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
-    t.index ['post_id'], name: 'index_comments_on_post_id'
-    t.index ['user_id'], name: 'index_comments_on_user_id'
+ActiveRecord::Schema.define(version: 2020_10_16_022423) do
+
+  create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "post_id"
+    t.text "body", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_comments_on_post_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
-  create_table 'likes', options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8', force: :cascade do |t|
-    t.bigint 'user_id'
-    t.bigint 'post_id'
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
-    t.index ['post_id'], name: 'index_likes_on_post_id'
-    t.index %w[user_id post_id], name: 'index_likes_on_user_id_and_post_id', unique: true
-    t.index ['user_id'], name: 'index_likes_on_user_id'
+  create_table "likes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "post_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_likes_on_post_id"
+    t.index ["user_id", "post_id"], name: "index_likes_on_user_id_and_post_id", unique: true
+    t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
-  create_table 'posts', options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8', force: :cascade do |t|
-    t.string 'images', null: false
-    t.text 'body', null: false
-    t.bigint 'user_id'
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
-    t.index ['user_id'], name: 'index_posts_on_user_id'
+  create_table "posts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "images", null: false
+    t.text "body", null: false
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
-  create_table 'users', options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8', force: :cascade do |t|
-    t.string 'email', null: false
-    t.string 'username', null: false
-    t.string 'crypted_password'
-    t.string 'salt'
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
-    t.index ['email'], name: 'index_users_on_email', unique: true
-    t.index ['username'], name: 'index_users_on_username', unique: true
+  create_table "relationships", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "follower_id", null: false
+    t.bigint "followed_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["followed_id"], name: "index_relationships_on_followed_id"
+    t.index ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true
+    t.index ["follower_id"], name: "index_relationships_on_follower_id"
   end
 
-  add_foreign_key 'comments', 'posts'
-  add_foreign_key 'comments', 'users'
-  add_foreign_key 'likes', 'posts'
-  add_foreign_key 'likes', 'users'
-  add_foreign_key 'posts', 'users'
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "email", null: false
+    t.string "username", null: false
+    t.string "crypted_password"
+    t.string "salt"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["username"], name: "index_users_on_username", unique: true
+  end
+
+  add_foreign_key "comments", "posts"
+  add_foreign_key "comments", "users"
+  add_foreign_key "likes", "posts"
+  add_foreign_key "likes", "users"
+  add_foreign_key "posts", "users"
+  add_foreign_key "relationships", "users", column: "followed_id"
+  add_foreign_key "relationships", "users", column: "follower_id"
 end
