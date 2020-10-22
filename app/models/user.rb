@@ -42,6 +42,15 @@ class User < ApplicationRecord
   # likeモデルのuser.idとpost.idの組み合わせを見てUserモデルをLikeモデルを経由してPostモデルと関連づける
   has_many :like_posts, through: :likes, source: :post
 
+  has_many :active_relationships, class_name:  'Relationship',
+           foreign_key: 'follower_id',
+           dependent:   :destroy
+  has_many :passive_relationships, class_name:  'Relationship',
+           foreign_key: 'followed_id',
+           dependent:   :destroy
+  has_many :following, through: :active_relationships, source: :followed
+  has_many :followers, through: :passive_relationships, source: :follower
+
   # モデルのscope = 複数のクエリをまとめたメソッド
   # DBからランダムにデータをcountの数取り出す
   scope :randoms, -> (count) { self.order("RAND()").limit(count) }
@@ -71,5 +80,21 @@ class User < ApplicationRecord
   def like?(post)
     # like_postsの中にpostオブジェクトが含まれていればtrueを返す。
     like_posts.include?(post)
+  end
+
+  def follow(other_user)
+    following << other_user
+  end
+
+  def unfollow(other_user)
+    following.destroy(other_user)
+  end
+
+  def following?(other_user)
+    following.include?(other_user)
+  end
+
+  def feed
+    Post.where(user_id: following_ids << id)
   end
 end
