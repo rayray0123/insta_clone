@@ -13,7 +13,7 @@ class PostsController < ApplicationController
     # ページネーションをつけたいデータに.page(params[:page])を追加
     # params[:page] 指定されたページ番号が入る
     @posts = Post.all.includes(:user).order(created_at: :desc).page(params[:page])
-    @random_users = User.randoms(5)
+    @users = User.recent(5)
   end
 
   def new

@@ -56,8 +56,8 @@ class User < ApplicationRecord
   has_many :followers, through: :passive_relationships, source: :follower
 
   # モデルのscope = 複数のクエリをまとめたメソッド
-  # DBからランダムにデータをcountの数取り出す
-  scope :randoms, -> (count) { self.order("RAND()").limit(count) }
+  # DBから新しい順にレコードをcountの数取り出す
+  scope :recent, -> (count) { order(created_at: :desc).limit(count) }
 
   # クラスメソッド = クラスオブジェクトから呼び出すためのメソッド
   # インスタンスメソッド = インスタンスオブジェクトから呼び出すためのメソッド(own?)
@@ -97,7 +97,7 @@ class User < ApplicationRecord
   def following?(other_user)
     following.include?(other_user)
   end
-  # 
+  #
   def feed
     Post.where(user_id: following_ids << id)
   end
