@@ -20,6 +20,13 @@
 #  fk_rails_...  (follower_id => users.id)
 #
 class Relationship < ApplicationRecord
-  belongs_to :follower
-  belongs_to :followed
+  # @relationship.followerのような形で、@relationshipに紐づいたuserレコードを取得することができる
+  belongs_to :follower, class_name: 'User'
+  belongs_to :followed, class_name: 'User'
+
+  # オブジェクトがDBに保存されるときにデータが空じゃないか検証
+  validates :follower_id, presence: true
+  validates :followed_id, presence: true
+  # follower_idとfollowed_idの同じ組み合わせを二つ以上保存しない
+  validates :follower_id, uniqueness: { scope: :followed_id }
 end

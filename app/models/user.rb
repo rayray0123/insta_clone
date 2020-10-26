@@ -42,12 +42,16 @@ class User < ApplicationRecord
   # likeモデルのuser.idとpost.idの組み合わせを見てUserモデルをLikeモデルを経由してPostモデルと関連づける
   has_many :like_posts, through: :likes, source: :post
 
+  # @user.followingをできるように、active_relationshipsを設定する。
+  # 外部キーをfollower_idとして指定し、Relationshipモデルを取得する。
   has_many :active_relationships, class_name:  'Relationship',
            foreign_key: 'follower_id',
            dependent:   :destroy
   has_many :passive_relationships, class_name:  'Relationship',
            foreign_key: 'followed_id',
            dependent:   :destroy
+  # @user.followingでfollower_idと対になるfollowed_idからfollowをしているuserを取得する
+  # userモデルのだれかから、最終的にfollow関係にあるuserモデルのだれかを参照する
   has_many :following, through: :active_relationships, source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
 
@@ -81,19 +85,19 @@ class User < ApplicationRecord
     # like_postsの中にpostオブジェクトが含まれていればtrueを返す。
     like_posts.include?(post)
   end
-
+  # 新しいfolllowしている人(followed_id)、followされている人(follower_id)の組み合わせをrelationshipモデルに追加
   def follow(other_user)
     following << other_user
   end
-
+  # アンフォローしたユーザーとされたユーザーを紐づけていたrelasionshipモデルのレコードを削除
   def unfollow(other_user)
     following.destroy(other_user)
   end
-
+  # current_userがフォローしているユーザーの中にother_userが含まれていればtrueを返す
   def following?(other_user)
     following.include?(other_user)
   end
-
+  # 
   def feed
     Post.where(user_id: following_ids << id)
   end
