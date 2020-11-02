@@ -5,6 +5,7 @@
       .card
         .card-body
           / _user.html.slimをレンダリング
+          / render partial: 'user', collection: @users
           = render @users
     .col-md-6.col-12.offset-md-3
       = paginate @users

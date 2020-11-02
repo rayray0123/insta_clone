@@ -15,7 +15,8 @@
           .card-header
             | ユーザー
           .card-body
-            / ユーザーが5人分ランダムに表示
+            / ユーザーが5人分ランダムに表示(@users = User.recent(5))
+            / render partial: 'user', collection: @users
             = render @users
           .card-footer
             / ユーザー一覧ページへ

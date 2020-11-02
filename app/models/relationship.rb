@@ -20,7 +20,7 @@
 #  fk_rails_...  (follower_id => users.id)
 #
 class Relationship < ApplicationRecord
-  # @relationship.followerのような形で、@relationshipに紐づいたuserレコードを取得することができる
+  # @relationship.followedのような形で、@relationshipに紐づいたuserレコードを取得することができる
   belongs_to :follower, class_name: 'User'
   belongs_to :followed, class_name: 'User'
 

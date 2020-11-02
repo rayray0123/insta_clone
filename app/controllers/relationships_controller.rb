@@ -9,6 +9,8 @@ class RelationshipsController < ApplicationController
   end
 
   def destroy
+    # followedはRelationshipモデルで定義したメソッド
+    # followed_idからそれと対をなすfollower_idに紐づくuserを取得して代入
     @user = Relationship.find(params[:id]).followed
     current_user.unfollow(@user)
   end

@@ -42,17 +42,21 @@ class User < ApplicationRecord
   # likeモデルのuser.idとpost.idの組み合わせを見てUserモデルをLikeモデルを経由してPostモデルと関連づける
   has_many :like_posts, through: :likes, source: :post
 
-  # @user.followingをできるように、active_relationshipsを設定する。
+  # user.followingをできるように、active_relationshipsを設定する。
   # 外部キーをfollower_idとして指定し、Relationshipモデルを取得する。
   has_many :active_relationships, class_name:  'Relationship',
            foreign_key: 'follower_id',
            dependent:   :destroy
+  # user.followersをできるように、passive_relationshipsを設定する。
+  # 外部キーをfollowed_idとして指定し、Relationshipモデルを取得する。
   has_many :passive_relationships, class_name:  'Relationship',
            foreign_key: 'followed_id',
            dependent:   :destroy
-  # @user.followingでfollower_idと対になるfollowed_idからfollowをしているuserを取得する
+
   # userモデルのだれかから、最終的にfollow関係にあるuserモデルのだれかを参照する
+  # user.followingでfollower_idと対になるfollowed_idからそのuser'が'followをしているuserを全て取得する
   has_many :following, through: :active_relationships, source: :followed
+  # user.followersでfollowed_idと対になるfollower_idからそのuser'を'followをしているuserを全て取得する
   has_many :followers, through: :passive_relationships, source: :follower
 
   # モデルのscope = 複数のクエリをまとめたメソッド

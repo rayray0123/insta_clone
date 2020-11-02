@@ -1,2 +1,3 @@
+/ ログインしているユーザーのfollower_idと対になるfollowed_idを渡す
 = link_to relationship_path(current_user.active_relationships.find_by(followed_id: user.id)), class: 'btn btn-warning btn-raised', method: :delete, remote: true do
   | アンフォロー
