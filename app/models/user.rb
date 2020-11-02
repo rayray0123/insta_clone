@@ -44,14 +44,14 @@ class User < ApplicationRecord
 
   # user.followingをできるように、active_relationshipsを設定する。
   # 外部キーをfollower_idとして指定し、Relationshipモデルを取得する。
-  has_many :active_relationships, class_name:  'Relationship',
-           foreign_key: 'follower_id',
-           dependent:   :destroy
+  has_many :active_relationships, class_name: 'Relationship',
+                                  foreign_key: 'follower_id',
+                                  dependent: :destroy
   # user.followersをできるように、passive_relationshipsを設定する。
   # 外部キーをfollowed_idとして指定し、Relationshipモデルを取得する。
-  has_many :passive_relationships, class_name:  'Relationship',
-           foreign_key: 'followed_id',
-           dependent:   :destroy
+  has_many :passive_relationships, class_name: 'Relationship',
+                                   foreign_key: 'followed_id',
+                                   dependent: :destroy
 
   # userモデルのだれかから、最終的にfollow関係にあるuserモデルのだれかを参照する
   # user.followingでfollower_idと対になるfollowed_idからそのuser'が'followをしているuserを全て取得する
@@ -61,7 +61,7 @@ class User < ApplicationRecord
 
   # モデルのscope = 複数のクエリをまとめたメソッド
   # DBから新しい順にレコードをcountの数取り出す
-  scope :recent, -> (count) { order(created_at: :desc).limit(count) }
+  scope :recent, ->(count) { order(created_at: :desc).limit(count) }
 
   # クラスメソッド = クラスオブジェクトから呼び出すためのメソッド
   # インスタンスメソッド = インスタンスオブジェクトから呼び出すためのメソッド(own?)
@@ -89,18 +89,22 @@ class User < ApplicationRecord
     # like_postsの中にpostオブジェクトが含まれていればtrueを返す。
     like_posts.include?(post)
   end
+
   # 新しいfolllowしている人(followed_id)、followされている人(follower_id)の組み合わせをrelationshipモデルに追加
   def follow(other_user)
     following << other_user
   end
+
   # アンフォローしたユーザーとされたユーザーを紐づけていたrelasionshipモデルのレコードを削除
   def unfollow(other_user)
     following.destroy(other_user)
   end
+
   # current_userがフォローしているユーザーの中にother_userが含まれていればtrueを返す
   def following?(other_user)
     following.include?(other_user)
   end
+
   # current_userがfollowしているuser.id、current_user自身の投稿をuser.idから投稿を取得
   # self.following_ids << self.id → current_userがfollowしているuserのidの配列に自身のuser.idを追加する
   def feed

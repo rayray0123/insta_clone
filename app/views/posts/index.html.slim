@@ -5,7 +5,7 @@
         /投稿を全て表示,render partial: 'post', collection: @postsを短縮して書いている
         = render @posts
       - else
-      .text-center.font-weight-bold
+        .text-center.font-weight-bold
         | 投稿がありません
       /_post.html.slimには何も書かなくてもkaminariが自動的にページネーションを実装してくれる
       = paginate @posts
