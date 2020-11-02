@@ -101,7 +101,8 @@ class User < ApplicationRecord
   def following?(other_user)
     following.include?(other_user)
   end
-  #
+  # current_userがfollowしているuser.id、current_user自身の投稿をuser.idから投稿を取得
+  # self.following_ids << self.id → current_userがfollowしているuserのidの配列に自身のuser.idを追加する
   def feed
     Post.where(user_id: following_ids << id)
   end

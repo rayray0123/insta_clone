@@ -12,7 +12,13 @@ class PostsController < ApplicationController
     # N＋1問題を解決するためにincludesを使いUserとPostをまとめて、一回ずつloadするだけにしている
     # ページネーションをつけたいデータに.page(params[:page])を追加
     # params[:page] 指定されたページ番号が入る
-    @posts = Post.all.includes(:user).order(created_at: :desc).page(params[:page])
+    @posts = if current_user
+               # ログインしている場合、自分とフォローしているuserの投稿のみ表示
+               current_user.feed.includes(:user).page(params[:page])
+             else
+               # ログインしていない場合、すべてのuserの投稿を表示
+               Post.all.includes(:user).page(params[:page])
+             end
 
     # User.order(created_at: :desc).limit(5)
     @users = User.recent(5)
