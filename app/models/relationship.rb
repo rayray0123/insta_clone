@@ -20,6 +20,8 @@
 #  fk_rails_...  (follower_id => users.id)
 #
 class Relationship < ApplicationRecord
+  # class_name = 一つのモデルに対して、二つのアソシエーション経路を組む場合に使用
+  # users.idに外部キー制約をはっている
   # @relationship.followedのような形で、@relationshipに紐づいたuserレコードを取得することができる
   belongs_to :follower, class_name: 'User'
   belongs_to :followed, class_name: 'User'

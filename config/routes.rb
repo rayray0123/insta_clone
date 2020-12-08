@@ -5,8 +5,10 @@
 #                     login GET    /login(.:format)                                                                         user_sessions#new
 #                           POST   /login(.:format)                                                                         user_sessions#create
 #                    logout DELETE /logout(.:format)                                                                        user_sessions#destroy
-#                     users POST   /users(.:format)                                                                         users#create
+#                     users GET    /users(.:format)                                                                         users#index
+#                           POST   /users(.:format)                                                                         users#create
 #                  new_user GET    /users/new(.:format)                                                                     users#new
+#                      user GET    /users/:id(.:format)                                                                     users#show
 #             post_comments GET    /posts/:post_id/comments(.:format)                                                       comments#index
 #                           POST   /posts/:post_id/comments(.:format)                                                       comments#create
 #          new_post_comment GET    /posts/:post_id/comments/new(.:format)                                                   comments#new
@@ -25,6 +27,8 @@
 #                           DELETE /posts/:id(.:format)                                                                     posts#destroy
 #                     likes POST   /likes(.:format)                                                                         likes#create
 #                      like DELETE /likes/:id(.:format)                                                                     likes#destroy
+#             relationships POST   /relationships(.:format)                                                                 relationships#create
+#              relationship DELETE /relationships/:id(.:format)                                                             relationships#destroy
 #        rails_service_blob GET    /rails/active_storage/blobs/:signed_id/*filename(.:format)                               active_storage/blobs#show
 # rails_blob_representation GET    /rails/active_storage/representations/:signed_blob_id/:variation_key/*filename(.:format) active_storage/representations#show
 #        rails_disk_service GET    /rails/active_storage/disk/:encoded_key/*filename(.:format)                              active_storage/disk#show

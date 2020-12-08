@@ -42,8 +42,11 @@ class User < ApplicationRecord
   # likeモデルのuser.idとpost.idの組み合わせを見てUserモデルをLikeモデルを経由してPostモデルと関連づける
   has_many :like_posts, through: :likes, source: :post
 
+  # user対user（多対多）の関係性をアソシエーションで表現していく
   # user.followingをできるように、active_relationshipsを設定する。
   # 外部キーをfollower_idとして指定し、Relationshipモデルを取得する。
+  # foreign_key = 外部キーをモデル名_id以外のカラムに指定したい場合,使用
+  # class_name = 一つのモデルに対して、二つのアソシエーション経路を組む場合に使用
   has_many :active_relationships, class_name: 'Relationship',
                                   foreign_key: 'follower_id',
                                   dependent: :destroy
@@ -54,6 +57,7 @@ class User < ApplicationRecord
                                    dependent: :destroy
 
   # userモデルのだれかから、最終的にfollow関係にあるuserモデルのだれかを参照する
+  # source = 関連先テーブル名とアソシエーション名が異なる場合は、sourceオプションを使う
   # user.followingでfollower_idと対になるfollowed_idからそのuser'が'followをしているuserを全て取得する
   has_many :following, through: :active_relationships, source: :followed
   # user.followersでfollowed_idと対になるfollower_idからそのuser'を'followをしているuserを全て取得する
