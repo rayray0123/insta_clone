@@ -42,6 +42,31 @@ class User < ApplicationRecord
   # likeモデルのuser.idとpost.idの組み合わせを見てUserモデルをLikeモデルを経由してPostモデルと関連づける
   has_many :like_posts, through: :likes, source: :post
 
+  # user対user（多対多）の関係性をアソシエーションで表現していく
+  # user.followingをできるように、active_relationshipsを設定する。
+  # 外部キーをfollower_idとして指定し、Relationshipモデルを取得する。
+  # foreign_key = 外部キーをモデル名_id以外のカラムに指定したい場合,使用
+  # class_name = 一つのモデルに対して、二つのアソシエーション経路を組む場合に使用
+  has_many :active_relationships, class_name: 'Relationship',
+                                  foreign_key: 'follower_id',
+                                  dependent: :destroy
+  # user.followersをできるように、passive_relationshipsを設定する。
+  # 外部キーをfollowed_idとして指定し、Relationshipモデルを取得する。
+  has_many :passive_relationships, class_name: 'Relationship',
+                                   foreign_key: 'followed_id',
+                                   dependent: :destroy
+
+  # userモデルのだれかから、最終的にfollow関係にあるuserモデルのだれかを参照する
+  # source = 関連先テーブル名とアソシエーション名が異なる場合は、sourceオプションを使う
+  # user.followingでfollower_idと対になるfollowed_idからそのuser'が'followをしているuserを全て取得する
+  has_many :following, through: :active_relationships, source: :followed
+  # user.followersでfollowed_idと対になるfollower_idからそのuser'を'followをしているuserを全て取得する
+  has_many :followers, through: :passive_relationships, source: :follower
+
+  # モデルのscope = 複数のクエリをまとめたメソッド
+  # DBから新しい順にレコードをcountの数取り出す
+  scope :recent, ->(count) { order(created_at: :desc).limit(count) }
+
   # クラスメソッド = クラスオブジェクトから呼び出すためのメソッド
   # インスタンスメソッド = インスタンスオブジェクトから呼び出すためのメソッド(own?)
   # ログインしている人の投稿だったらtrueを返す
@@ -67,5 +92,26 @@ class User < ApplicationRecord
   def like?(post)
     # like_postsの中にpostオブジェクトが含まれていればtrueを返す。
     like_posts.include?(post)
+  end
+
+  # 新しいfolllowしている人(followed_id)、followされている人(follower_id)の組み合わせをrelationshipモデルに追加
+  def follow(other_user)
+    following << other_user
+  end
+
+  # アンフォローしたユーザーとされたユーザーを紐づけていたrelasionshipモデルのレコードを削除
+  def unfollow(other_user)
+    following.destroy(other_user)
+  end
+
+  # current_userがフォローしているユーザーの中にother_userが含まれていればtrueを返す
+  def following?(other_user)
+    following.include?(other_user)
+  end
+
+  # current_userがfollowしているuser.id、current_user自身の投稿をuser.idから投稿を取得
+  # self.following_ids << self.id → current_userがfollowしているuserのidの配列に自身のuser.idを追加する
+  def feed
+    Post.where(user_id: following_ids << id)
   end
 end

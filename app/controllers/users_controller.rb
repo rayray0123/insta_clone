@@ -1,4 +1,8 @@
 class UsersController < ApplicationController
+  def index
+    @users = User.all.page(params[:page]).order(created_at: :desc)
+  end
+
   def new
     @user = User.new
   end
@@ -12,6 +16,10 @@ class UsersController < ApplicationController
       flash.now[:danger] = 'ユーザーに作成に失敗しました'
       render :new # ユーザー登録画面へ戻る
     end
+  end
+
+  def show
+    @user = User.find(params[:id])
   end
 
   private

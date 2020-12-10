@@ -1,8 +1,12 @@
 .container
   .row
     .col-md-8.col-12
-      /投稿を全て表示,render partial: 'post', collection: @postsを短縮して書いている
-      = render @posts
+      - if @posts.present?
+        /投稿を全て表示,render partial: 'post', collection: @postsを短縮して書いている
+        = render @posts
+      - else
+        .text-center.font-weight-bold
+        | 投稿がありません
       /_post.html.slimには何も書かなくてもkaminariが自動的にページネーションを実装してくれる
       = paginate @posts
     .col-md-4.col-12
@@ -15,17 +19,9 @@
           .card-header
             | ユーザー
           .card-body
-            .user.mb-3
-              = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle mr-1'
-              | ダミー藤原
-            .user.mb-3
-              = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle mr-1'
-              | ダミー増川
-            .user.mb-3
-              = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle mr-1'
-              | ダミー直井
-            .user.mb-3
-              = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle mr-1'
-              | ダミー升
+            / ユーザーが5人分ランダムに表示(@users = User.recent(5))
+            / render partial: 'user', collection: @users
+            = render @users
           .card-footer
-            = link_to 'すべて見る', '#'
+            / ユーザー一覧ページへ
+            = link_to 'すべて見る', users_path
