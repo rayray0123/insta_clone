@@ -39,4 +39,6 @@ class Post < ApplicationRecord
   validates :body, presence: true, length: { maximum: 1000 }
   # 投稿した画像が空じゃないか
   validates :images, presence: true
+
+  scope :body_contain, ->(word) { where('body LIKE ?', "%#{word}%") }
 end
