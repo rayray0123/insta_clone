@@ -52,6 +52,7 @@ Rails.application.routes.draw do
   # https://kossy-web-engineer.hatenablog.com/entry/2018/10/17/063136
   resources :posts, shallow: true do
     # ネスト = ある記述の中に入れ子構造で別の記述をする方法
+    # collection = ルーティングにコレクション（/photos/searchのようにidを伴わないパス）を追加するときに使う。
     collection do
       get :search
     end
