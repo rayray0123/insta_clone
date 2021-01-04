@@ -44,4 +44,7 @@ class Post < ApplicationRecord
   # ? = プレースホルダ(クエリに変数を書ける、SQLインジェクション対策になる)
   # https://railsguides.jp/security.html#sqlインジェクション
   scope :body_contain, ->(word) { where('body LIKE ?', "%#{word}%") }
+  # postテーブルをベースにcommentsテーブルを結合
+  scope :comment_body_contain, ->(word) { joins(:comments).where('comments.body LIKE ?', "%#{word}%") }
+  scope :username_contain, ->(word) { joins(:users).where('username LIKE ?', "%#{word}%") }
 end

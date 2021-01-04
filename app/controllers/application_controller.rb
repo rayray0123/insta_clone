@@ -18,6 +18,6 @@ class ApplicationController < ActionController::Base
   end
   # fetch,{} = 指定したキーがないときにエラーを出さないようにする
   def search_post_params
-    params.fetch(:q, {}).permit(:body)
+    params.fetch(:q, {}).permit(:body, :comment_body, :username)
   end
 end

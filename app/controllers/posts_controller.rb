@@ -72,6 +72,8 @@ class PostsController < ApplicationController
     @post.destroy!
     redirect_to root_path, success: '投稿を削除しました'
   end
+
+  # メソッド実行前にset_search_posts_formメソッド実行
   # キーワードで検索してsearch.html.slimをレンダリング
   def search
     @posts = @search_form.search.includes(:user).page(params[:page])
