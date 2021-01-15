@@ -1,0 +1,9 @@
+/ ☆そのuserの投稿の画像をタイル表示
+/ 変数名(thumbnail_post)はパーシャル名と同じにしないといけない
+/ class: 'thumbs' = application.scss内に記述
+/ post_path(URLヘルパーメソッド) = /posts/:id
+/ iconと同じようにimage_tagでリンクに画像を設定
+/ thumbnail_post.images.first.url = CarrierWaveがpublic/uploads/post/imagesフォルダから一枚目の画像を持ってくる
+.col-md-4.mb-3
+  = link_to post_path(thumbnail_post), class: 'thumbs' do
+    = image_tag thumbnail_post.images.first.url
