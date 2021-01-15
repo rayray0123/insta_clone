@@ -1,8 +1,0 @@
-/ 検索結果表示
-.container
-  .row
-    .col-md-8.col-12.offset-md-2
-      h2.text-center
-        | 検索結果: #{@posts.total_count}件
-      = render @posts
-      = paginate @posts
