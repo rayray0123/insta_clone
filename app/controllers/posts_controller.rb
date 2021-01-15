@@ -14,10 +14,10 @@ class PostsController < ApplicationController
     # params[:page] 指定されたページ番号が入る
     @posts = if current_user
                # ログインしている場合、自分とフォローしているuserの投稿のみ表示
-               current_user.feed.includes(:user).page(params[:page])
+               current_user.feed.includes(:user).page(params[:page]).order(created_at: :desc)
              else
                # ログインしていない場合、すべてのuserの投稿を表示
-               Post.all.includes(:user).page(params[:page])
+               Post.all.includes(:user).page(params[:page]).order(created_at: :desc)
              end
 
     # User.order(created_at: :desc).limit(5)

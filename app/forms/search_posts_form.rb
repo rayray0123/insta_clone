@@ -18,7 +18,7 @@ class SearchPostsForm
     # inject = eachとは違う記述で繰り返し処理を行うメソッド
     # 使い方 = 配列.inject {|結果, 要素| ブロック処理 }
     # 1番目と2番目の要素をブロック処理、実行結果と3番目の要素をブロック処理、・・・
-    # 実際のinjectの処理 = 検索したい文字が含まれる投稿（配列）をOR検索する
+    # 実際のinjectの処理 = 検索したい文字が含まれる投稿（配列）をまとめて、OR検索する
     scope = splited_bodies.map { |splited_body| scope.body_contain(splited_body) }.inject { |result, scp| result.or(scp) } if body.present?
     # postsテーブルとcommentsテーブルを内部結合させている(joins)
     # よって入力されたキーワードが含まれるコメントがある投稿を検索
