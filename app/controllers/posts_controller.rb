@@ -73,6 +73,12 @@ class PostsController < ApplicationController
     redirect_to root_path, success: '投稿を削除しました'
   end
 
+  # メソッド実行前にset_search_posts_formメソッド実行
+  # キーワードで検索してsearch.html.slimをレンダリング
+  def search
+    @posts = @search_form.search.includes(:user).page(params[:page])
+  end
+
   private
 
   def post_params # ストロングパラメータ = Web上から入力されてきた値を制限することで、
