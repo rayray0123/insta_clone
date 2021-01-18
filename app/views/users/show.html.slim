@@ -1,7 +1,7 @@
 / ユーザー詳細ページ
 .container
   .row
-    .col-md-6.offset-md-3
+    .col-md-10.offset-md-1
       .card
         .card-body
           .text-center.mb-3
@@ -10,3 +10,8 @@
             = @user.username
           .text-center
             = render 'follow_area', user: @user
+          hr
+          .row
+            / partial = viewの一部を別ファイルに切り出し、可読性と再利用性を上げる。
+            / Viewでの繰り返し部分を、eachメソッドを使用するのではなく、コレクションをレンダリングすることで実装する。
+            = render partial: 'posts/thumbnail_post', collection: @user.posts
