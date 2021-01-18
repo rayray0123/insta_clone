@@ -19,6 +19,7 @@
 class User < ApplicationRecord
   authenticates_with_sorcery!
 
+  mount_uploader :avatar, AvatarUploader
   # バリデーションは、正しいデータだけをデータベースに保存するために行われる
   # usernameが重複していないか、空じゃないか
   validates :username, uniqueness: true, presence: true
