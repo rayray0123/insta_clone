@@ -16,6 +16,7 @@ class ApplicationController < ActionController::Base
   def set_search_posts_form
     @search_form = SearchPostsForm.new(search_post_params)
   end
+
   # fetch,{} = 指定したキーがないときにエラーを出さないようにする
   def search_post_params
     params.fetch(:q, {}).permit(:body, :comment_body, :username)
