@@ -4,8 +4,9 @@
     .col-md-10.offset-md-1
       .card
         .card-body
-          / &をつけないと、undefined method `id' for nil:NilClass となる
-          / ↑ &がcurrent_userがnullかどうか確かめて、nullの場合if文の中身を実行しない
+          / &をつけないと、ログインしていない時、undefined method `id' for nil:NilClass となる
+          / ↑ &(ぼっち演算子)がcurrent_userがnullかどうか確かめて、nullの場合.idメソッドを呼び出さず
+          /   nillを返しif文の中身を実行しない
           - if current_user&.id == @user.id
             .text-center.mb-3
               = link_to 'プロフィール編集', edit_mypage_account_path, class: 'btn btn-raised btn-warning'

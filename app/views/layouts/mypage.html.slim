@@ -6,7 +6,9 @@ html
     title マイページ | InstaCloneApp
     = csrf_meta_tags
     = csp_meta_tag
+    / assets/stylesheets/mypage.scssを読み込む
     = stylesheet_link_tag 'mypage', media: 'all'
+    / assets/javascript/mypage.js を読み込む
     = javascript_include_tag 'mypage'
   body
     = render 'shared/header'

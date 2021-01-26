@@ -1,3 +1,4 @@
+/ 投稿一覧表示、ユーザー5人分表示
 .container
   .row
     .col-md-8.col-12
@@ -12,6 +13,7 @@
     .col-md-4.col-12
       - if logged_in?
         .profile-box.mb-3
+          / ログインしているユーザーのアバター、名前表示
           = image_tag current_user.avatar.url, size: '50x50', class: 'rounded-circle mr-1'
           = link_to current_user.username, edit_mypage_account_path
       .users-box

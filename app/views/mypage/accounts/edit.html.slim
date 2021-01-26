@@ -1,9 +1,14 @@
+/ アカウント編集画面
 = form_with model: @user, url: mypage_account_path, method: :patch, local: true do |f|
   = render 'shared/error_messages', object: f.object
   .form-group
     = f.label :avatar
+    / onchange = ファイルが選択されたらmypage.js内のpreviewFileWithIdを実行
+    / accept = アップロードするファイルを画像だけに制限している
     = f.file_field :avatar, onchange: 'previewFileWithId(preview)', class: 'form-control', accept: 'image/*'
+    / 更新失敗してこの画面に戻ってきた時、選んでいた画像が表示される
     = f.hidden_field :avatar_cache
+    / id = 要素固有の識別子
     = image_tag @user.avatar.url, class: 'rounded-circle', id: 'preview', size: '100x100'
   .form-group
     = f.label :username
