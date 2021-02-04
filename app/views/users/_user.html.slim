@@ -1,7 +1,7 @@
 / ユーザー一覧ページでユーザーを1人分表示
 .user.mb-3.d-flex.justify-content-between
   = link_to user_path(user) do
-    = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle mr-1'
+    = image_tag user.avatar.url, size: '40x40', class: 'rounded-circle mr-1'
     = user.username
   = render 'users/follow_area', user: user
 hr
