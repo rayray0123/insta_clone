@@ -5,7 +5,8 @@ class Mypage::AccountsController < Mypage::BaseController
   end
 
   def update
-    @user = User.find(current_user.id)
+    # @user = User.find(current_user.id)
+    @user = current_user
     if @user.update(account_params)
       # アカウント編集画面にリダイレクト
       redirect_to edit_mypage_account_path, success: 'プロフィールを更新しました'
