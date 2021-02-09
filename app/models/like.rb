@@ -27,4 +27,12 @@ class Like < ApplicationRecord
   # user_id_とpost_idの組み合わせが同じものは一つだけに制限。いいねを2回させない。
   # scope: = 一意性チェックの範囲を限定する別の属性を指定する
   validates :user_id, uniqueness: { scope: :post_id }
+
+  after_create_commit :create_activities
+
+  private
+
+  def create_activities
+    Activity.create(subject: self, user: post.user, action_type: :liked_to_own_post)
+  end
 end

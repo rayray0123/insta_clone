@@ -64,6 +64,7 @@ class User < ApplicationRecord
   has_many :following, through: :active_relationships, source: :followed
   # user.followersでfollowed_idと対になるfollower_idからそのuser'を'followをしているuserを全て取得する
   has_many :followers, through: :passive_relationships, source: :follower
+  has_many :activities, dependent: :destroy
 
   # モデルのscope = 複数のクエリをまとめたメソッド
   # DBから新しい順にレコードをcountの数取り出す
