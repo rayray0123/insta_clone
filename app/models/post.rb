@@ -33,6 +33,7 @@ class Post < ApplicationRecord
   # @post.like_usersとするとpostにlikeしているuserを取得できる
   # PostモデルをLikeモデルを経由してUserモデルと関連づける
   has_many :like_users, through: :likes, source: :user
+  has_one :activity, as: :subject, dependent: :destroy
   # belongs = 属する
   belongs_to :user
   # 投稿した文章が空じゃないか

@@ -25,7 +25,7 @@ class Relationship < ApplicationRecord
   # @relationship.followedのような形で、@relationshipに紐づいたuserレコードを取得することができる
   belongs_to :follower, class_name: 'User'
   belongs_to :followed, class_name: 'User'
-
+  has_one :activity, as: :subject, dependent: :destroy
   # オブジェクトがDBに保存されるときにデータが空じゃないか検証
   validates :follower_id, presence: true
   validates :followed_id, presence: true
