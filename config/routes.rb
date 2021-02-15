@@ -64,11 +64,15 @@ Rails.application.routes.draw do
   end
   resources :likes, only: %i[create destroy]
   resources :relationships, only: %i[create destroy]
+  resources :activities, only: [] do
+    patch :read, on: :member
+  end
 
   # namespace = URLを指定のPATHにしたくて、ファイル構成も指定のものにしたい時
   # scopeではないのは、この後の課題で違うaccounts_controllerがでてくるから？
   # https://qiita.com/ryosuketter/items/9240d8c2561b5989f049
   namespace :mypage do
     resource :account, only: %i[edit update]
+    resources :activities, only: %i[index]
   end
 end
