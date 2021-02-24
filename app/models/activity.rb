@@ -27,7 +27,7 @@ class Activity < ApplicationRecord
   # Url HelperはController、HelperとViewでしか使えないので、クラスでredirect_pathを使用できるようにしている
   include Rails.application.routes.url_helpers
   # ポリモーフィックをsubjectという名前で設定
-  # ポリモーフィックを使わないと
+  # subjectについては mypage/activities/index.html.slimにもコメント
   belongs_to :subject, polymorphic: true
   belongs_to :user
   # _header_activities.html.slim で使用するscope
