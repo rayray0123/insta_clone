@@ -64,6 +64,9 @@ class User < ApplicationRecord
   has_many :following, through: :active_relationships, source: :followed
   # user.followersでfollowed_idと対になるfollower_idからそのuser'を'followをしているuserを全て取得する
   has_many :followers, through: :passive_relationships, source: :follower
+  
+  # ログインしているユーザーへの通知を取ってくるため、関連づけ
+  # （_header_activities.html.slim、 mypage/activities_controller内）
   has_many :activities, dependent: :destroy
 
   # モデルのscope = 複数のクエリをまとめたメソッド

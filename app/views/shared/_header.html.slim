@@ -16,8 +16,10 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-white
         .dropdown
           a#dropdownMenuButton.nav-link.position-relative href="#" data-toggle="dropdown" aria-expanded="false" aria-haspopup="true"
             = icon 'far', 'heart', class: 'fa-lg'
+            / 未読の数をハートアイコンの上に表示
             = render 'shared/unread_badge'
           #header-activities.dropdown-menu.dropdown-menu-right.m-0.p-0 aria-labelledby="dropdownMenuButton"
+            / ヘッダーの通知ボタン(ハート)をクリック時
             = render 'shared/header_activities'
       li.nav-item
         = link_to 'ログアウト', logout_path, class: 'nav-link', method: :delete

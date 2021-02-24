@@ -16,7 +16,6 @@ class CommentsController < ApplicationController
 
   def update
     @comment = current_user.comments.find(params[:id])
-    binding.pry
     @comment.update(comment_update_params)
   end
 

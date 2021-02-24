@@ -1,4 +1,4 @@
-# == Route Map
+# == Route Map == [annotate --routes]
 #
 #                    Prefix Verb   URI Pattern                                                                              Controller#Action
 #                      root GET    /                                                                                        posts#index
@@ -30,9 +30,11 @@
 #                      like DELETE /likes/:id(.:format)                                                                     likes#destroy
 #             relationships POST   /relationships(.:format)                                                                 relationships#create
 #              relationship DELETE /relationships/:id(.:format)                                                             relationships#destroy
+#             read_activity PATCH  /activities/:id/read(.:format)                                                           activities#read
 #       edit_mypage_account GET    /mypage/account/edit(.:format)                                                           mypage/accounts#edit
 #            mypage_account PATCH  /mypage/account(.:format)                                                                mypage/accounts#update
 #                           PUT    /mypage/account(.:format)                                                                mypage/accounts#update
+#         mypage_activities GET    /mypage/activities(.:format)                                                             mypage/activities#index
 #        rails_service_blob GET    /rails/active_storage/blobs/:signed_id/*filename(.:format)                               active_storage/blobs#show
 # rails_blob_representation GET    /rails/active_storage/representations/:signed_blob_id/:variation_key/*filename(.:format) active_storage/representations#show
 #        rails_disk_service GET    /rails/active_storage/disk/:encoded_key/*filename(.:format)                              active_storage/disk#show
@@ -65,6 +67,7 @@ Rails.application.routes.draw do
   resources :likes, only: %i[create destroy]
   resources :relationships, only: %i[create destroy]
   resources :activities, only: [] do
+    # on: 名前付きルートを指定
     patch :read, on: :member
   end
 

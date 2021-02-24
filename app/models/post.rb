@@ -33,6 +33,10 @@ class Post < ApplicationRecord
   # @post.like_usersとするとpostにlikeしているuserを取得できる
   # PostモデルをLikeモデルを経由してUserモデルと関連づける
   has_many :like_users, through: :likes, source: :user
+  
+  # has_one = その宣言が行われているモデルのインスタンスが、
+  #           他方のモデルのインスタンスを「まるごと含んでいる」または「所有している」ことを示す。
+  # as: = ポリモーフィック関連を定義
   has_one :activity, as: :subject, dependent: :destroy
   # belongs = 属する
   belongs_to :user
