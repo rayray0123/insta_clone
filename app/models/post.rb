@@ -18,6 +18,8 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Post < ApplicationRecord
+  # belongs = 属する
+  belongs_to :user
   # PostモデルにCarrierwaveを関連付け
   mount_uploaders :images, PostImageUploader
   # MySQL5.7からならカラムを作る時点でJASON型にすればいい
@@ -33,13 +35,11 @@ class Post < ApplicationRecord
   # @post.like_usersとするとpostにlikeしているuserを取得できる
   # PostモデルをLikeモデルを経由してUserモデルと関連づける
   has_many :like_users, through: :likes, source: :user
-  
+
   # has_one = その宣言が行われているモデルのインスタンスが、
   #           他方のモデルのインスタンスを「まるごと含んでいる」または「所有している」ことを示す。
   # as: = ポリモーフィック関連を定義
-  has_one :activity, as: :subject, dependent: :destroy
-  # belongs = 属する
-  belongs_to :user
+  has_many :activity, as: :subject, dependent: :destroy
   # 投稿した文章が空じゃないか
   validates :body, presence: true, length: { maximum: 1000 }
   # 投稿した画像が空じゃないか

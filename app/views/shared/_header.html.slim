@@ -6,20 +6,20 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-white
     = render 'posts/search_form', search_form: @search_form
     ul.navbar-nav.mt-2.mt-lg-0
       li.nav-item
-        = current_user.username
         = link_to new_post_path, class: 'nav-link' do
           = icon 'far', 'image', class: 'fa-lg'
-      li.nav-item
-        = link_to user_path(current_user), class: 'nav-link' do
-          = icon 'far', 'heart', class: 'fa-lg'
       li.nav-item
         .dropdown
           a#dropdownMenuButton.nav-link.position-relative href="#" data-toggle="dropdown" aria-expanded="false" aria-haspopup="true"
             = icon 'far', 'heart', class: 'fa-lg'
-            / 未読の数をハートアイコンの上に表示
+            /未読の数をハートアイコンの上に表示
             = render 'shared/unread_badge'
           #header-activities.dropdown-menu.dropdown-menu-right.m-0.p-0 aria-labelledby="dropdownMenuButton"
-            / ヘッダーの通知ボタン(ハート)をクリック時
+            /ヘッダーの通知ボタンをクリック時
             = render 'shared/header_activities'
+
+      li.nav-item
+        = link_to user_path(current_user), class: 'nav-link' do
+          = icon 'far', 'user', class: 'fa-lg'
       li.nav-item
         = link_to 'ログアウト', logout_path, class: 'nav-link', method: :delete

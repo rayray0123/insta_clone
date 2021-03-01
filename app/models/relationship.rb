@@ -25,11 +25,11 @@ class Relationship < ApplicationRecord
   # @relationship.followedのような形で、@relationshipに紐づいたuserレコードを取得することができる
   belongs_to :follower, class_name: 'User'
   belongs_to :followed, class_name: 'User'
-  
+
   # has_one = その宣言が行われているモデルのインスタンスが、
   #           他方のモデルのインスタンスを「まるごと含んでいる」または「所有している」ことを示す。
   # as: = ポリモーフィック関連を定義
-  has_one :activity, as: :subject, dependent: :destroy
+  has_many :activity, as: :subject, dependent: :destroy
   # オブジェクトがDBに保存されるときにデータが空じゃないか検証
   validates :follower_id, presence: true
   validates :followed_id, presence: true

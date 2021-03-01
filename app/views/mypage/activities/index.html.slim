@@ -1,9 +1,9 @@
 / マイページの通知一覧の表示
 - if @activities.present?
   - @activities.each do |activity|
-    / mypage/activities内のhtmlファイルをレンダリング
-    / ここで渡しているactivityの種類(subject_type)によって、
-    / activity.subject.なになにと書けば、いいねされた投稿や、コメントや、フォロワーをDBから取ってこれる
+/ activities内のhtmlファイルをaction_typeに従ってレンダリング
+/ ここで渡しているactivityのsubject_typeによって、
+/ activity.subject.なになにと書けば、いいねされた投稿や、コメントや、フォロワーをDBから取ってこれる
     = render "#{activity.action_type}", activity: activity
   = paginate @activities
 - else

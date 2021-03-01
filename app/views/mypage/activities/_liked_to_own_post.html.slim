@@ -1,5 +1,5 @@
-/ 自分の投稿へのいいねの通知
-/ #{'read' if activity.read?} = 既読の場合、背景を暗く表示
+/自分の投稿へのいいねの通知
+/'read' if activity.read? = 既読の場合、背景を暗く表示
 = link_to read_activity_path(activity), class: "dropdown-item border-bottom #{'read' if activity.read?}", method: :patch do
   = image_tag activity.subject.user.avatar.url, class: 'rounded-circle mr-1', size: '30x30'
   object

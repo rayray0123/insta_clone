@@ -23,12 +23,12 @@ class Comment < ApplicationRecord
   # defaultでbelongs_toの第一引数に、そのモデルに紐づくモデル名を全て小文字で単数系で設定
   belongs_to :user
   belongs_to :post
-  
+
   # has_one = その宣言が行われているモデルのインスタンスが、
   #           他方のモデルのインスタンスを「まるごと含んでいる」または「所有している」ことを示す。
   # as: = ポリモーフィック関連を定義
   # activity.rb の belongs_to :subject, polymorphic: true と セットで設定する
-  has_one :activity, as: :subject, dependent: :destroy
+  has_many :activity, as: :subject, dependent: :destroy
 
   validates :body, presence: true, length: { maximum: 1000 }
 

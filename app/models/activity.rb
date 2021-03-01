@@ -28,7 +28,7 @@ class Activity < ApplicationRecord
   include Rails.application.routes.url_helpers
   # ポリモーフィックをsubjectという名前で設定
   # subjectについては mypage/activities/index.html.slimにもコメント
-  belongs_to :subject, polymorphic: true
+  belongs_to :subject, polymorphic: true, dependent: :destroy
   belongs_to :user
   # _header_activities.html.slim で使用するscope
   scope :recent, ->(count) { order(created_at: :desc).limit(count)}
