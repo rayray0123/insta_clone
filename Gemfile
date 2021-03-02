@@ -82,3 +82,4 @@ gem 'nokogiri', '~> 1.10.8'
 gem 'popper_js'
 gem 'rails-i18n'
 gem 'config'
+# configについて http://vdeep.net/rubyonrails-config-gem
