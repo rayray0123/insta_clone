@@ -9,10 +9,17 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-white
         = link_to new_post_path, class: 'nav-link' do
           = icon 'far', 'image', class: 'fa-lg'
       li.nav-item
-        = link_to user_path(current_user), class: 'nav-link' do
-          = icon 'far', 'heart', class: 'fa-lg'
+        .dropdown
+          a#dropdownMenuButton.nav-link.position-relative href="#" data-toggle="dropdown" aria-expanded="false" aria-haspopup="true"
+            = icon 'far', 'heart', class: 'fa-lg'
+            /未読の数をハートアイコンの上に表示
+            = render 'shared/unread_badge'
+          #header-activities.dropdown-menu.dropdown-menu-right.m-0.p-0 aria-labelledby="dropdownMenuButton"
+            /ヘッダーの通知ボタンをクリック時
+            = render 'shared/header_activities'
+
       li.nav-item
-        a.nav-link href="#"
+        = link_to user_path(current_user), class: 'nav-link' do
           = icon 'far', 'user', class: 'fa-lg'
       li.nav-item
         = link_to 'ログアウト', logout_path, class: 'nav-link', method: :delete

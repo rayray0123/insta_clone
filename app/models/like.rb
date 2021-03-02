@@ -24,7 +24,20 @@ class Like < ApplicationRecord
   # belongs_toで多対１
   belongs_to :user
   belongs_to :post
+
+  # has_one = その宣言が行われているモデルのインスタンスが、
+  #           他方のモデルのインスタンスを「まるごと含んでいる」または「所有している」ことを示す。
+  # as: = ポリモーフィック関連を定義
+  has_many :activity, as: :subject, dependent: :destroy
   # user_id_とpost_idの組み合わせが同じものは一つだけに制限。いいねを2回させない。
   # scope: = 一意性チェックの範囲を限定する別の属性を指定する
   validates :user_id, uniqueness: { scope: :post_id }
+  # modelに紐付くインスタンスがcreateされた直後に必ず、発火する
+  after_create_commit :create_activities
+
+  private
+
+  def create_activities
+    Activity.create(subject: self, user: post.user, action_type: :liked_to_own_post)
+  end
 end

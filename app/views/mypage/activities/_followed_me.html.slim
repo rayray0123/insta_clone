@@ -1,0 +1,11 @@
+/自分のアカウントへのフォローの通知
+/'read' if activity.read? = 既読の場合、背景を暗く表示
+= link_to read_activity_path(activity), class: "dropdown-item border-bottom #{'read' if activity.read?}", method: :patch do
+  = image_tag activity.subject.follower.avatar.url, class: 'rounded-circle mr-1', size: '30x30'
+  object
+    = link_to activity.subject.follower.username, user_path(activity.subject.follower)
+  | があなたをフォローしました
+  .text-right
+    / lメソッド = ロケールファイル内の書式を参照してレコードを表示してくれる
+    / config/locales/ja.yml で設定したshort: の方を表示
+    = l activity.created_at, format: :short

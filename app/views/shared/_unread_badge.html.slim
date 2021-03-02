@@ -1,0 +1,5 @@
+/ 未読の数をハートアイコンの上に表示
+- if current_user.activities.unread.count > 0
+  / top: 0; right:0 で右上に寄せて表示
+  span.badge.badge-warning.navbar-badge.position-absolute style='top: 0; right:0;'
+    = current_user.activities.unread.count

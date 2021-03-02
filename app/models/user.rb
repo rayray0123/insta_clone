@@ -65,6 +65,10 @@ class User < ApplicationRecord
   # user.followersでfollowed_idと対になるfollower_idからそのuser'を'followをしているuserを全て取得する
   has_many :followers, through: :passive_relationships, source: :follower
 
+  # ログインしているユーザーへの通知を取ってくるため、関連づけ
+  # （_header_activities.html.slim、 mypage/activities_controller内）
+  has_many :activities, dependent: :destroy
+
   # モデルのscope = 複数のクエリをまとめたメソッド
   # DBから新しい順にレコードをcountの数取り出す
   scope :recent, ->(count) { order(created_at: :desc).limit(count) }
