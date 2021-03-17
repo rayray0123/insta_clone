@@ -5,7 +5,7 @@ class LikesController < ApplicationController
     @post = Post.find(params[:post_id])
     # current_user.like_postsで得られる投稿（ログインユーザーがいいねした投稿）に、
     # 今いいねした投稿を追加。このときlikeテーブルに新しくレコードが作られる。
-    current_user.like(@post)
+    UserMailer.with(user_from: current_user, user_to: @post.user, post: @post).like_post.deliver_later if current_user.like(@post)
   end
 
   def destroy
