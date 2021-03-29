@@ -1,3 +1,4 @@
+/ コメントされた時に届くメール本文(投稿されたコメントへのリンク付き)
 h2 = "#{@user_to.username}さん"
 p = "#{@user_from.username}さんがあなたの投稿にコメントしました。"
 = link_to "確認する", post_url(@comment.post, { anchor: "comment-#{@comment.id}" })

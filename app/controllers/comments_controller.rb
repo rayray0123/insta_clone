@@ -5,6 +5,10 @@ class CommentsController < ApplicationController
   def create
     # ちゃんと user_id, body, post_id 指定して、コメントをインスタンス変数に代入できている
     @comment = current_user.comments.build(comment_params)
+    # コメントの通知メールを送る
+    # with() = メイラーアクションへ渡すキーの値を設定
+    # メイラーアクション = UserMailer内のメソッド
+    # deliver_later = Active Jobと連携して非同期にメール送信を行えるメソッド
     UserMailer.with(user_from: current_user, user_to: @comment.post.user, comment: @comment).comment_post.deliver_later if @comment.save
   end
 

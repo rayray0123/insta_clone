@@ -54,6 +54,7 @@ group :development do
   gem 'rubocop', require: false
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  # Ruby on Railsの開発環境で送信したメールをブラウザで確認するためのgem
   gem 'letter_opener_web'
 end
 
