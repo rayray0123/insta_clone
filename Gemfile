@@ -54,6 +54,8 @@ group :development do
   gem 'rubocop', require: false
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  # Ruby on Railsの開発環境で送信したメールをブラウザで確認するためのgem
+  gem 'letter_opener_web'
 end
 
 group :test do
@@ -80,3 +82,5 @@ gem 'kaminari'
 gem 'nokogiri', '~> 1.10.8'
 gem 'popper_js'
 gem 'rails-i18n'
+gem 'config'
+# configについて http://vdeep.net/rubyonrails-config-gem

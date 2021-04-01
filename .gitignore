@@ -33,3 +33,7 @@
 /public/uploads
 # redisデータ永続化に関するファイル
 dump.rdb
+
+config/settings.local.yml
+config/settings/*.local.yml
+config/environments/*.local.yml
