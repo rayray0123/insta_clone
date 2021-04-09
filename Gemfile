@@ -84,3 +84,5 @@ gem 'popper_js'
 gem 'rails-i18n'
 gem 'config'
 # configについて http://vdeep.net/rubyonrails-config-gem
+gem 'sidekiq'
+gem 'sinatra'
