@@ -1,4 +1,7 @@
+# 最大同時実行数
 :concurrency: 25
+# mailersと名前の付いたキューを使用する設定
+# キューの優先順位もここで設定できる
 :queues:
   - default
   - mailers

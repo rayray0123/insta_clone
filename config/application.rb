@@ -33,7 +33,7 @@ module InstaClone
 
     config.i18n.default_locale = :ja
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s]
-
+    # sidekiqをキュー機能で使うように設定
     config.active_job.queue_adapter = :sidekiq
   end
   require 'active_model/railtie'

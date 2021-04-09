@@ -84,5 +84,6 @@ gem 'popper_js'
 gem 'rails-i18n'
 gem 'config'
 # configについて http://vdeep.net/rubyonrails-config-gem
+# バックグラウンドでキューを処理するサーバー、sidekiq
 gem 'sidekiq'
 gem 'sinatra'
