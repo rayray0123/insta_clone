@@ -33,6 +33,10 @@ module InstaClone
 
     config.i18n.default_locale = :ja
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s]
+    # sidekiqをバックグラウンドジョブを動かすアダプタとして設定
+    # sidekiq を使うためには Client, Redis, Server の 3 つが必要
+    # Client → アプリケーション自身、 Server → bundle exec sidekiq で実行
+    config.active_job.queue_adapter = :sidekiq
   end
   require 'active_model/railtie'
   require 'active_job/railtie'
